@@ -1,8 +1,10 @@
 const app = require("./app");
-
+const db = require("./database");
+const port = 4000 || 5000 || 6000
 const main = async()=>{
-    await app.listen(4004)
-    app.once("on",()=>{
-        console.log("Server start at port 4004")
-    })
+    await app.listen(port,()=>{
+        console.log(`Server listen at port ${port}`);
+    });
 }
+
+main();
