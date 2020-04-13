@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dbName = 'devChat4'
-const URI = `mongod://localhost/${dbName}`;
+const URI = `mongodb://localhost/${dbName}`;
 const connect = () => {return mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })};
 connect()
 .then(()=>{
@@ -8,5 +8,6 @@ connect()
 })
 .catch((err)=>{
     console.log(`Error to connect db`);
+    console.log(err.message)
 })
 module.exports = mongoose.connection;

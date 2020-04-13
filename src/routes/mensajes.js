@@ -1,10 +1,11 @@
 const {Router} = require('express');
 const router = Router();
 
+const {createMensaje,readMensajes} = require('../controller/mensajes');
+router.route("/")
+    .post(createMensaje);
 
-router.route('/')
-    .get((req,res)=>{
-        res.send('hola mensajes')
-    })
+router.route("/:de/:para")
+    .get(readMensajes)
 
 module.exports = router;
