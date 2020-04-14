@@ -2,6 +2,7 @@ const mensajeModel = require('../model/mensajes');
 const mensajeController = {}
 
 mensajeController.createMensaje = async(req,res)=>{
+    /*Guardamos los datos */
     const {texto,de,para} = req.body;
     const mensajeTmp = new mensajeModel({
         de,
@@ -13,19 +14,31 @@ mensajeController.createMensaje = async(req,res)=>{
 }
 
 mensajeController.readMensajes = async(req,res)=>{
-    const {de,para} = req.params;
-    const misMensajesEnviados = await mensajeModel.find({
-        de,
-        para
-    }) || "ninguno";
-    const misMensajesRecibidos = await mensajeModel.find({
-        de:para,
-        para:de
-    }) || "ninguno";
+    /*Vemos los mensajes del chat */
+    
+    //Obtenemos los integrantes del chat
+    const {para} = req.params;
+    const de = 'ezequiel';
+    //Guardamos los mensajes enviados y recibidos
+        const misMensajesEnviados = await mensajeModel.find({
+            de,
+            para
+        }) || "ninguno";
+        const misMensajesRecibidos = await mensajeModel.find({
+            de:para,
+            para:de
+        }) || "ninguno";
+    let mensaje = misMensajesRecibidos.concat(misMensajesEnviados);
+    mensaje.sort((a,b)=>{
+        if(a.createdAt < b.createdAt){
+            return a;
+        }else{
+            return b;
+        }
 
+    })
     res.json({
-        misMensajesEnviados: misMensajesEnviados,
-        misMensajesRecibidos: misMensajesRecibidos 
+        mensajes:mensaje
     });
 }
 

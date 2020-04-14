@@ -8,6 +8,6 @@ const app = express();
     app.use(express.urlencoded({extended:true}));
     app.use(cors());
 
-app.use("/api/mensajes",require('./routes/mensajes'));
+app.use("/api/chats",require('./routes/chats'));
 
 module.exports = app;

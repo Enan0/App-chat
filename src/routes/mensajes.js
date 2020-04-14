@@ -5,7 +5,7 @@ const {createMensaje,readMensajes} = require('../controller/mensajes');
 router.route("/")
     .post(createMensaje);
 
-router.route("/:de/:para")
+router.route("/:para")
     .get(readMensajes)
 
 module.exports = router;

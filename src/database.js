@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbName = 'devChat4'
 const URI = `mongodb://localhost/${dbName}`;
-const connect = () => {return mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })};
+const connect = () => {return mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true,useFindAndModify: false  })};
 connect()
 .then(()=>{
     console.log(`Connections successful to ${dbName}`);
