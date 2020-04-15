@@ -6,10 +6,12 @@ const mensajeSchema = new Schema({
     },
     chat:{
         type:Schema.Types.ObjectId,
-        ref: "chats"
+        ref: "chats",
+        default:"noChat"
     },
     texto:{
-        type:String
+        type:String,
+        default:""
     },
     fecha:{
         type:Date,
