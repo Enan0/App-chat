@@ -6,8 +6,7 @@ const mensajeSchema = new Schema({
     },
     chat:{
         type:Schema.Types.ObjectId,
-        ref: "chats",
-        default:"noChat"
+        ref: "chats"
     },
     texto:{
         type:String,
