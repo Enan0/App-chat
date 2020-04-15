@@ -10,5 +10,6 @@ const app = express();
 
 app.use("/api/chats",require('./routes/chats'));
 app.use("/api/users",require('./routes/users'));
+app.use("/api/mensajes",require('./routes/mensajes'));
 
 module.exports = app;
