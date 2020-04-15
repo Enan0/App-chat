@@ -1,11 +1,8 @@
 const {Router} = require('express');
 const router = Router();
 
-const {createMensaje,readMensajes} = require('../controller/mensajes');
+const {createMensaje,viewAllMensajes} = require('../controller/mensajes');
 router.route("/")
+    .get(viewAllMensajes)
     .post(createMensaje);
-
-router.route("/:para")
-    .get(readMensajes)
-
 module.exports = router;
