@@ -6,7 +6,8 @@ const mensajeSchema = new Schema({
     },
     chat:{
         type:Schema.Types.ObjectId,
-        ref: "chats"
+        ref: "chats",
+        autopopulate:true
     },
     texto:{
         type:String,
@@ -19,5 +20,5 @@ const mensajeSchema = new Schema({
 },{
     id:true
 });
-
+mensajeSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model("mensajes",mensajeSchema);

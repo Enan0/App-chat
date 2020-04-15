@@ -6,7 +6,8 @@ const userSchema = new Schema({
     chats:[{
         chat:{
             type:Schema.Types.ObjectId,
-            ref:"chats"
+            ref:"chats",
+            autopopulate:true
         }
     }]
 },{
@@ -14,4 +15,5 @@ const userSchema = new Schema({
     timestamps:false
 });
 
+userSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model("users",userSchema);
