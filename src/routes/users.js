@@ -4,8 +4,8 @@ const router = Router();
 const {viewAllUsers,createUser} = require('../controller/users');
 
 router.route('/')
-    .post(viewAllUsers)
-    .get(createUser)
+    .post(createUser)
+    .get(viewAllUsers)
 
 
 module.exports = router;
