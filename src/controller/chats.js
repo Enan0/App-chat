@@ -5,17 +5,17 @@ const chatController = {};
 
 chatController.createChat = async (req, res) => {
     /* Creamos un chat */
-    //1) Creamos los participantes
+    //1) Creamos los participantes *
     const participante1 = await userModel.findOne({nombre:"ezequiel"});
     const participante2 = await userModel.findOne({nombre:"juan"});
     const participantes = [{participante:participante1},{participante:participante2}];
     // 2)Creamos el chat
     const chat = new chatModel({
-        participantes
+        participantes: participantes
     });
     //3) Lo persistimos
     chat.save()
-        .then(res.json({ status: "true" }))
+        .then(()=>{res.json({ status: "true" })})
         .catch((err) => {
             res.json({
                 status: "error",
