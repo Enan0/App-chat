@@ -9,5 +9,6 @@ const app = express();
     app.use(cors());
 
 app.use("/api/chats",require('./routes/chats'));
+app.use("/api/users",require('./routes/users'));
 
 module.exports = app;
