@@ -5,17 +5,20 @@ const chatController = {};
 
 chatController.createChat = async (req, res) => {
     /* Creamos un chat */
-    //1) Creamos los participantes *
-    const participante1 = await userModel.findOne({nombre:"ezequiel"});
-    const participante2 = await userModel.findOne({nombre:"juan"});
-    const participantes = [{participante:participante1},{participante:participante2}];
+    //1) Buscamos los participantes *
+        const {nombres} = req.body; //<-Obtiene una lista de nombres del form
+        const obtaniedUsers = await userModel.find(nombres); //<-busca en la db registros con los nombres
+
     // 2)Creamos el chat
-    const chat = new chatModel({
-        participantes: participantes
+        const chat = new chatModel();
+    //Recorre la lista de usuarios obtenidos y los agrega al chat
+    obtaniedUsers.map(usuario =>{
+        chat.participantes.push({participante:usuario});
     });
     //3) Lo persistimos
     chat.save()
         .then(()=>{res.json({ status: "true" })})
+        //Mensaje de error general
         .catch((err) => {
             res.json({
                 status: "error",
@@ -23,6 +26,7 @@ chatController.createChat = async (req, res) => {
             });
         });
 }
+
 //DEV TOOL
 chatController.viewAllChats = async (req, res) => {
     /*Vemos los chats */
