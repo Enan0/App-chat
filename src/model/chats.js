@@ -10,7 +10,7 @@ const chatsSchema = new Schema({
         }
     }],
     mensajes: [{
-        mensajes: {
+        mensaje: {
             type: Schema.Types.ObjectId,
             ref: "mensajes",
             autopopulate:true
