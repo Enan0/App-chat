@@ -1,51 +1,26 @@
-const chatModel = require('../model/chats');
-const mensajeModel = require('../model/mensajes');
+const chatModel = require('../model/chats')
+const mensajeModel = require('../model/mensajes')
 const chatController = {};
 
-chatController.readChats = async(req,res)=>{
-    const CHATS = await chatModel.find();
-    res.json(CHATS);
-
-}
-
-
-chatController.createChat = async(req,res)=>{
+chatController.createChat = (req,res)=>{
+    /* Creamos un chat */
+    //1) Creamos los participantes
+    const participante1 = [{nombre:"ezequiel"}];
+    const participante2 = [{nombre:"juan"}]
+    const participantes = participante1.concat(participante2);
+    //2)Creamos el chat
     const chat = new chatModel({
-        participantes:[{
-            nombre:"juan",
-            
-        },{
-            nombre:"ezequiel",
-        }]
+        participantes:participantes,
     });
-    await chat.save();
-}
+    chat.save()
+    .then(res.json({status:"chat created"}));
 
-chatController.updateChat = async(idChat,mensaje)=>{
-    const chat = await chatModel.findByIdAndUpdate(idChat,{mensajes:mensaje});
-    console.log(mensaje._id)
-    chat.save();
 }
-
-chatController.sendMessage = async(req,res)=>{
-    const {texto}= req.body;
-    const idChat = req.params.id; 
-    var chat = await chatModel.findById(idChat);
-    const mensaje = new mensajeModel({
-        chat,
-        texto,
-    });
-    await mensaje.save();
-    chatController.updateChat(idChat,mensaje);
-    res.json({status:"Mensaje enviado"});
+//DEV TOOL
+chatController.viewAllChats = async(req,res)=>{
+    /*Vemos los chats */
+    //1)Pedimos los chats
+    const chats = await chatModel.find()
+    .then(response=>{res.json(response)})
 }
- 
-chatController.readMensaje = async(req,res)=>{
-    const idChat = req.params.id; 
-    const chat = await chatModel.findById(idChat);
-    console.log("eh?")
-    const mensaje = chat.test();
-    res.json({mensaje:mensaje});
-}
-
 module.exports = chatController;

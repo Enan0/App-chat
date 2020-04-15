@@ -1,9 +1,12 @@
 const {Schema,model} = require('mongoose');
 const chatModel = require('./chats');
 const mensajeSchema = new Schema({
+    usuario:{
+        type:String
+    },
     chat:{
         type:Schema.Types.ObjectId,
-        autopopulate: true,
+        ref: "chats"
     },
     texto:{
         type:String
@@ -12,6 +15,8 @@ const mensajeSchema = new Schema({
         type:Date,
         default:Date.now
     }
+},{
+    id:true
 });
 
 module.exports = model("mensajes",mensajeSchema);

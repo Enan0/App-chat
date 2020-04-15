@@ -1,26 +1,21 @@
-const {Schema,model,} = require('mongoose');
+const { Schema, model, } = require('mongoose');
 const mensajes = require('./mensajes');
+const users = require('./users');
 const chatsSchema = new Schema({
-    participantes:[{
-       nombre:String
-    }],
-    mensajes:[{
-        mensaje:{
-            type:Schema.Types.ObjectId,
-            ref:"mensajes",
-            autopopulate: true,
+    participantes: [{
+        participante: {
+            type: Schema.Types.ObjectId,
+            ref: "users"
         }
     }],
+    mensajes: [{
+        mensajes: {
+            type: Schema.Types.ObjectId,
+            ref: "mensajes"
+        }
+    }],
+}, {
+    id: true
 });
 
-
-// chatsSchema.method('getMensajes',(inst)=>{
-//     return inst.find()
-//     .populate("mensajes")
-//     .exec();
-// });
-
-chatsSchema.method('test',function(){
-    return this.populate('mensajes');
-})
-module.exports = model("chats",chatsSchema);
+module.exports = model("chats", chatsSchema);
