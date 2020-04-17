@@ -32,6 +32,19 @@ chatController.viewAllChats = async (req, res) => {
     /*Vemos los chats */
     //1)Pedimos los chats
     const chats = await chatModel.find()
-        .then(response => { res.json(response) })
+    .then(res.json(chats));
+    
 }
+
+chatController.viewAllChatId = async (req, res) => {
+    /*Consultamos solo los id de los chats*/
+    //1)Pedimos los chats
+    const chats = await chatModel.find();
+    let onlyId = [];
+    chats.forEach(chat => {
+        onlyId.push(chat._id);
+    });
+    res.json(onlyId)
+}
+
 module.exports = chatController;
