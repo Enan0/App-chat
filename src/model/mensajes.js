@@ -18,7 +18,7 @@ const mensajeSchema = new Schema({
         default:Date.now
     }
 },{
-    id:true
+    id:false
 });
 mensajeSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model("mensajes",mensajeSchema);

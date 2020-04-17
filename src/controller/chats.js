@@ -32,7 +32,7 @@ chatController.viewAllChats = async (req, res) => {
     /*Vemos los chats */
     //1)Pedimos los chats
     const chats = await chatModel.find()
-    .then(res.json(chats));
+    .then((response)=>res.json(response));
     
 }
 
@@ -41,8 +41,10 @@ chatController.viewAllChatId = async (req, res) => {
     //1)Pedimos los chats
     const chats = await chatModel.find();
     let onlyId = [];
+    console.log(chats.length);
     chats.forEach(chat => {
-        onlyId.push(chat._id);
+        console.log(chat.id)
+        onlyId.push(chat.id);
     });
     res.json(onlyId)
 }
