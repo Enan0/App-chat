@@ -16,6 +16,13 @@ mensajeController.viewMensajesEnChat = async(req,res)=>{
     res.json(mensajesDelChat);
 }
 
+mensajeController.getTextoChat = async(req,res)=>{
+    /*Obtiene solo el texto y usuario del mensaje */
+    const chat = await chatModel.findById(req.params.chat);
+    const mensajes = await mensajeModel.find({},{texto:1});
+    res.json(mensajes);
+}
+
 mensajeController.createMensaje = async(req, res) => { 
     /*Crea un mensaje */
     const {texto} = req.body;
