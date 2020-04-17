@@ -24,9 +24,7 @@ mensajeController.createMensaje = async(req, res) => {
     });
     await mensaje.save()
     .then(res.json({status:"mensaje creado"}))
-    .catch((err)=>{
-        res.json({ERROR:err.message});
-    })    
+    .catch((err)=>{res.json({ERROR:err.message});});
     
     
 }
@@ -41,16 +39,13 @@ mensajeController.createMensajesEnChat = async(req,res)=>{
     const mensaje = new mensajeModel({chat,texto});
     await mensaje.save()
     .then(()=>{
+        //3)Guardar mensaje en el chat
         chat.mensajes.push({mensaje:mensaje})
+        //4)Persistimos
         chat.save()
-        .then(
-            res.json({status:"mensaje enviado al chat"})
-        )
-        .catch((err)=>{res.json({ERROR:err.message});})
+        .then(res.json({status:"mensaje enviado al chat"}))
+        .catch((err)=>{res.json({ERROR:err.message});});
     })
-    //3)Guardar mensaje en el chat
-    
-    
 }
 
 
